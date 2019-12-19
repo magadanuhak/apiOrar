@@ -30,12 +30,11 @@ class ScheduleController extends Controller
             ->where([
                 ['semester', '=', $semester],
                 ['week', '=', $week],
-                ['week_day', '=', $week_day]
-            ])->orWhere([
-                ['group.id', '=', $id],
-                ['teacher.id', '=', $id],
-                ['auditory.id', '=', $id]
-            ])
+                ['week_day', '=', $week_day],
+                ['group.id', '=', $id]
+            ])->orWhere(
+                'teacher.id', '=', $id
+            )->orWhere('auditory.id', '=', $id)
             ->orderBy('lesson_number', 'ASC')
             ->get()
             ->groupBy('lesson_number');
@@ -49,7 +48,7 @@ class ScheduleController extends Controller
 
     public function getOwnersNames()
     {
-        $owners = Owner::OrderBy('category', 'ASC')->OrderBy('name', 'ASC')->get();
+        $owners = Owner::select('id', DB::raw("CONCAT(name, ' | ' , category) as name"), 'category')->OrderBy('category', 'ASC')->OrderBy('name', 'ASC')->get();
         return response()->json($owners->toArray());
     }
 
