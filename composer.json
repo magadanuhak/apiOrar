@@ -12,7 +12,7 @@
         "barryvdh/laravel-cors": "^0.11.4",
         "clegginabox/pdf-merger": "dev-master",
         "doctrine/dbal": "^2.10",
-        "dompdf/dompdf": "^0.8.3",
+        "dompdf/dompdf": "^2.0.2",
         "fideloper/proxy": "^4.0",
         "fpdf/fpdf": "dev-master",
         "laravel/framework": "^6.2",
